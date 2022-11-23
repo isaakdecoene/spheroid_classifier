@@ -1,0 +1,214 @@
+Key,Value
+CellProfiler_Version,4.2.1
+Default_InputFolder,c:\users\u0083921
+Default_OutputFolder,c:\users\u0083921
+Pipeline_Pipeline,"CellProfiler Pipeline: http://www.cellprofiler.org
+Version:5
+DateRevision:421
+GitHash:
+ModuleCount:13
+HasImagePlaneDetails:False
+
+LoadData:[module_num:1|svn_version:'Unknown'|variable_revision_number:6|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Input data file location:Default Input Folder sub-folder|Documents\\spheroid_docker\\stella\\input\\STELLA_sA800_fullyauto_Merge_100-20_C01_D7\\cellprofiler
+    Name of the file:load_input.csv
+    Load images based on this data?:Yes
+    Base image location:Default Input Folder|
+    Process just a range of rows?:No
+    Rows to process:1,100000
+    Group images by metadata?:No
+    Select metadata tags for grouping:
+    Rescale intensities?:Yes
+
+RescaleIntensity:[module_num:2|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:original
+    Name the output image:orignal_rescale
+    Rescaling method:Stretch each image to use the full intensity range
+    Method to calculate the minimum intensity:Custom
+    Method to calculate the maximum intensity:Custom
+    Lower intensity limit for the input image:0.0
+    Upper intensity limit for the input image:1.0
+    Intensity range for the input image:0.0,1.0
+    Intensity range for the output image:0.0,1.0
+    Select image to match in maximum intensity:None
+    Divisor value:1.0
+    Divisor measurement:None
+
+ColorToGray:[module_num:3|svn_version:'Unknown'|variable_revision_number:4|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:orignal_rescale
+    Conversion method:Combine
+    Image type:RGB
+    Name the output image:original_gray
+    Relative weight of the red channel:1.0
+    Relative weight of the green channel:1.0
+    Relative weight of the blue channel:1.0
+    Convert red to gray?:Yes
+    Name the output image:OrigRed
+    Convert green to gray?:Yes
+    Name the output image:OrigGreen
+    Convert blue to gray?:Yes
+    Name the output image:OrigBlue
+    Convert hue to gray?:Yes
+    Name the output image:OrigHue
+    Convert saturation to gray?:Yes
+    Name the output image:OrigSaturation
+    Convert value to gray?:Yes
+    Name the output image:OrigValue
+    Channel count:1
+    Channel number:1
+    Relative weight of the channel:1.0
+    Image name:Channel1
+
+IdentifyPrimaryObjects:[module_num:4|svn_version:'Unknown'|variable_revision_number:15|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the input image:probabilities
+    Name the primary objects to be identified:spheroids
+    Typical diameter of objects, in pixel units (Min,Max):10,100000
+    Discard objects outside the diameter range?:Yes
+    Discard objects touching the border of the image?:Yes
+    Method to distinguish clumped objects:Shape
+    Method to draw dividing lines between clumped objects:Shape
+    Size of smoothing filter:10
+    Suppress local maxima that are closer than this minimum allowed distance:7.0
+    Speed up by using lower-resolution image to find local maxima?:Yes
+    Fill holes in identified objects?:After both thresholding and declumping
+    Automatically calculate size of smoothing filter for declumping?:Yes
+    Automatically calculate minimum allowed distance between local maxima?:Yes
+    Handling of objects if excessive number of objects identified:Continue
+    Maximum number of objects:500
+    Use advanced settings?:Yes
+    Threshold setting version:12
+    Threshold strategy:Global
+    Thresholding method:Otsu
+    Threshold smoothing scale:1.3
+    Threshold correction factor:1.0
+    Lower and upper bounds on threshold:0.0,1.0
+    Manual threshold:0.0
+    Select the measurement to threshold with:None
+    Two-class or three-class thresholding?:Two classes
+    Log transform before thresholding?:No
+    Assign pixels in the middle intensity class to the foreground or the background?:Foreground
+    Size of adaptive window:50
+    Lower outlier fraction:0.05
+    Upper outlier fraction:0.05
+    Averaging method:Mean
+    Variance method:Standard deviation
+    # of deviations:2.0
+    Thresholding method:Minimum Cross-Entropy
+
+MeasureObjectSizeShape:[module_num:5|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select object sets to measure:spheroids
+    Calculate the Zernike features?:No
+    Calculate the advanced features?:No
+
+FilterObjects:[module_num:6|svn_version:'Unknown'|variable_revision_number:9|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the objects to filter:spheroids
+    Name the output objects:spheroids_filtered
+    Select the filtering mode:Measurements
+    Select the filtering method:Limits
+    Select the objects that contain the filtered objects:None
+    Select the location of the rules or classifier file:Elsewhere...|
+    Rules or classifier file name:rules.txt
+    Class number:1
+    Measurement count:3
+    Additional object count:0
+    Assign overlapping child to:Parent with most overlap
+    Keep removed objects as a seperate set?:No
+    Name the objects removed by the filter:RemovedObjects
+    Select the measurement to filter by:AreaShape_Compactness
+    Filter using a minimum measurement value?:No
+    Minimum value:0.0
+    Filter using a maximum measurement value?:Yes
+    Maximum value:2
+    Select the measurement to filter by:AreaShape_Eccentricity
+    Filter using a minimum measurement value?:No
+    Minimum value:0.0
+    Filter using a maximum measurement value?:Yes
+    Maximum value:0.8
+    Select the measurement to filter by:AreaShape_Area
+    Filter using a minimum measurement value?:Yes
+    Minimum value:100
+    Filter using a maximum measurement value?:No
+    Maximum value:1.0
+
+MeasureObjectSizeShape:[module_num:7|svn_version:'Unknown'|variable_revision_number:3|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select object sets to measure:spheroids_filtered
+    Calculate the Zernike features?:No
+    Calculate the advanced features?:No
+
+MeasureTexture:[module_num:8|svn_version:'Unknown'|variable_revision_number:7|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:original_gray
+    Select objects to measure:spheroids_filtered
+    Enter how many gray levels to measure the texture at:256
+    Hidden:1
+    Measure whole images or objects?:Objects
+    Texture scale to measure:3
+
+MeasureObjectIntensityDistribution:[module_num:9|svn_version:'Unknown'|variable_revision_number:6|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:original_gray
+    Hidden:1
+    Hidden:1
+    Hidden:0
+    Calculate intensity Zernikes?:None
+    Maximum zernike moment:9
+    Select objects to measure:spheroids_filtered
+    Object to use as center?:These objects
+    Select objects to use as centers:None
+    Scale the bins?:Yes
+    Number of bins:4
+    Maximum radius:100
+
+MeasureObjectIntensity:[module_num:10|svn_version:'Unknown'|variable_revision_number:4|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select images to measure:original_gray
+    Select objects to measure:spheroids_filtered
+
+OverlayObjects:[module_num:11|svn_version:'Unknown'|variable_revision_number:1|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Input:orignal_rescale
+    Name the output image:object_image
+    Objects:spheroids_filtered
+    Opacity:0.9
+
+SaveImages:[module_num:12|svn_version:'Unknown'|variable_revision_number:16|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the type of image to save:Image
+    Select the image to save:object_image
+    Select method for constructing file names:From image filename
+    Select image name for file prefix:original
+    Enter single file name:OrigBlue
+    Number of digits:4
+    Append a suffix to the image file name?:Yes
+    Text to append to the image name:_cp_output
+    Saved file format:tiff
+    Output file location:Default Output Folder|Documents\\spheroid_docker\\stella\\input\\STELLA_sA800_fullyauto_Merge_100-20_C01_D7\\cellprofile
+    Image bit depth:32-bit floating point
+    Overwrite existing files without warning?:Yes
+    When to save:Every cycle
+    Record the file and path information to the saved image?:No
+    Create subfolders in the output folder?:No
+    Base image folder:Elsewhere...|
+    How to save the series:T (Time)
+    Save with lossless compression?:Yes
+
+ExportToSpreadsheet:[module_num:13|svn_version:'Unknown'|variable_revision_number:13|show_window:True|notes:[]|batch_state:array([], dtype=uint8)|enabled:True|wants_pause:False]
+    Select the column delimiter:Comma ("","")
+    Add image metadata columns to your object data file?:No
+    Add image file and folder names to your object data file?:Yes
+    Select the measurements to export:Yes
+    Calculate the per-image mean values for object measurements?:Yes
+    Calculate the per-image median values for object measurements?:No
+    Calculate the per-image standard deviation values for object measurements?:Yes
+    Output file location:Default Output Folder|Documents\\spheroid_docker\\stella\\input\\STELLA_sA800_fullyautoMerge_100-20_C01_D7\\cellprofile
+    Create a GenePattern GCT file?:No
+    Select source of sample row name:Metadata
+    Select the image to use as the identifier:None
+    Select the metadata to use as the identifier:None
+    Export all measurement types?:Yes
+    Press button to select measurements:spheroids|AreaShape_BoundingBoxArea,spheroids|AreaShape_MinFeretDiameter,spheroids|AreaShape_MaxFeretDiameter,spheroids|AreaShape_MedianRadius,spheroids|AreaShape_Center_X,spheroids|AreaShape_Center_Y,spheroids|AreaShape_MinorAxisLength,spheroids|AreaShape_Compactness,spheroids|AreaShape_BoundingBoxMaximum_X,spheroids|AreaShape_BoundingBoxMaximum_Y,spheroids|AreaShape_MajorAxisLength,spheroids|AreaShape_FormFactor,spheroids|AreaShape_BoundingBoxMinimum_X,spheroids|AreaShape_BoundingBoxMinimum_Y,spheroids|AreaShape_EquivalentDiameter,spheroids|AreaShape_EulerNumber,spheroids|AreaShape_Perimeter,spheroids|AreaShape_ConvexArea,spheroids|AreaShape_Orientation,spheroids|AreaShape_MaximumRadius,spheroids|AreaShape_Extent,spheroids|AreaShape_Eccentricity,spheroids|AreaShape_Area,spheroids|AreaShape_MeanRadius,spheroids|AreaShape_Solidity,spheroids|Location_Center_X,spheroids|Location_Center_Y,spheroids|Location_Center_Z,spheroids|Number_Object_Number,spheroids|Children_spheroids_filtered_Count,spheroids_filtered|Texture_InverseDifferenceMoment_original_gray_3_03_256,spheroids_filtered|Texture_InverseDifferenceMoment_original_gray_3_02_256,spheroids_filtered|Texture_InverseDifferenceMoment_original_gray_3_01_256,spheroids_filtered|Texture_InverseDifferenceMoment_original_gray_3_00_256,spheroids_filtered|Texture_SumAverage_original_gray_3_01_256,spheroids_filtered|Texture_SumAverage_original_gray_3_02_256,spheroids_filtered|Texture_SumAverage_original_gray_3_00_256,spheroids_filtered|Texture_SumAverage_original_gray_3_03_256,spheroids_filtered|Texture_Variance_original_gray_3_01_256,spheroids_filtered|Texture_Variance_original_gray_3_03_256,spheroids_filtered|Texture_Variance_original_gray_3_02_256,spheroids_filtered|Texture_Variance_original_gray_3_00_256,spheroids_filtered|Texture_SumVariance_original_gray_3_00_256,spheroids_filtered|Texture_SumVariance_original_gray_3_02_256,spheroids_filtered|Texture_SumVariance_original_gray_3_03_256,spheroids_filtered|Texture_SumVariance_original_gray_3_01_256,spheroids_filtered|Texture_DifferenceVariance_original_gray_3_03_256,spheroids_filtered|Texture_DifferenceVariance_original_gray_3_02_256,spheroids_filtered|Texture_DifferenceVariance_original_gray_3_00_256,spheroids_filtered|Texture_DifferenceVariance_original_gray_3_01_256,spheroids_filtered|Texture_InfoMeas2_original_gray_3_03_256,spheroids_filtered|Texture_InfoMeas2_original_gray_3_00_256,spheroids_filtered|Texture_InfoMeas2_original_gray_3_02_256,spheroids_filtered|Texture_InfoMeas2_original_gray_3_01_256,spheroids_filtered|Texture_AngularSecondMoment_original_gray_3_00_256,spheroids_filtered|Texture_AngularSecondMoment_original_gray_3_02_256,spheroids_filtered|Texture_AngularSecondMoment_original_gray_3_03_256,spheroids_filtered|Texture_AngularSecondMoment_original_gray_3_01_256,spheroids_filtered|Texture_Correlation_original_gray_3_00_256,spheroids_filtered|Texture_Correlation_original_gray_3_02_256,spheroids_filtered|Texture_Correlation_original_gray_3_03_256,spheroids_filtered|Texture_Correlation_original_gray_3_01_256,spheroids_filtered|Texture_InfoMeas1_original_gray_3_01_256,spheroids_filtered|Texture_InfoMeas1_original_gray_3_02_256,spheroids_filtered|Texture_InfoMeas1_original_gray_3_03_256,spheroids_filtered|Texture_InfoMeas1_original_gray_3_00_256,spheroids_filtered|Texture_Contrast_original_gray_3_00_256,spheroids_filtered|Texture_Contrast_original_gray_3_03_256,spheroids_filtered|Texture_Contrast_original_gray_3_02_256,spheroids_filtered|Texture_Contrast_original_gray_3_01_256,spheroids_filtered|Texture_DifferenceEntropy_original_gray_3_02_256,spheroids_filtered|Texture_DifferenceEntropy_original_gray_3_00_256,spheroids_filtered|Texture_DifferenceEntropy_original_gray_3_03_256,spheroids_filtered|Texture_DifferenceEntropy_original_gray_3_01_256,spheroids_filtered|Texture_SumEntropy_original_gray_3_01_256,spheroids_filtered|Texture_SumEntropy_original_gray_3_03_256,spheroids_filtered|Texture_SumEntropy_original_gray_3_00_256,spheroids_filtered|Texture_SumEntropy_original_gray_3_02_256,spheroids_filtered|Texture_Entropy_original_gray_3_00_256,spheroids_filtered|Texture_Entropy_original_gray_3_03_256,spheroids_filtered|Texture_Entropy_original_gray_3_02_256,spheroids_filtered|Texture_Entropy_original_gray_3_01_256,spheroids_filtered|Parent_spheroids,spheroids_filtered|AreaShape_MinFeretDiameter,spheroids_filtered|AreaShape_MaxFeretDiameter,spheroids_filtered|AreaShape_FormFactor,spheroids_filtered|AreaShape_MajorAxisLength,spheroids_filtered|AreaShape_EulerNumber,spheroids_filtered|AreaShape_Area,spheroids_filtered|AreaShape_Extent,spheroids_filtered|AreaShape_Perimeter,spheroids_filtered|AreaShape_MedianRadius,spheroids_filtered|AreaShape_BoundingBoxMinimum_X,spheroids_filtered|AreaShape_BoundingBoxMinimum_Y,spheroids_filtered|AreaShape_Compactness,spheroids_filtered|AreaShape_Eccentricity,spheroids_filtered|AreaShape_Center_Y,spheroids_filtered|AreaShape_Center_X,spheroids_filtered|AreaShape_EquivalentDiameter,spheroids_filtered|AreaShape_MeanRadius,spheroids_filtered|AreaShape_BoundingBoxMaximum_X,spheroids_filtered|AreaShape_BoundingBoxMaximum_Y,spheroids_filtered|AreaShape_MinorAxisLength,spheroids_filtered|AreaShape_BoundingBoxArea,spheroids_filtered|AreaShape_ConvexArea,spheroids_filtered|AreaShape_Orientation,spheroids_filtered|AreaShape_Solidity,spheroids_filtered|AreaShape_MaximumRadius,spheroids_filtered|Intensity_UpperQuartileIntensity_original_gray,spheroids_filtered|Intensity_MaxIntensityEdge_original_gray,spheroids_filtered|Intensity_MADIntensity_original_gray,spheroids_filtered|Intensity_MeanIntensity_original_gray,spheroids_filtered|Intensity_StdIntensity_original_gray,spheroids_filtered|Intensity_IntegratedIntensity_original_gray,spheroids_filtered|Intensity_IntegratedIntensityEdge_original_gray,spheroids_filtered|Intensity_MinIntensityEdge_original_gray,spheroids_filtered|Intensity_LowerQuartileIntensity_original_gray,spheroids_filtered|Intensity_MaxIntensity_original_gray,spheroids_filtered|Intensity_MedianIntensity_original_gray,spheroids_filtered|Intensity_StdIntensityEdge_original_gray,spheroids_filtered|Intensity_MinIntensity_original_gray,spheroids_filtered|Intensity_MeanIntensityEdge_original_gray,spheroids_filtered|Intensity_MassDisplacement_original_gray,spheroids_filtered|RadialDistribution_RadialCV_original_gray_4of4,spheroids_filtered|RadialDistribution_RadialCV_original_gray_1of4,spheroids_filtered|RadialDistribution_RadialCV_original_gray_2of4,spheroids_filtered|RadialDistribution_RadialCV_original_gray_3of4,spheroids_filtered|RadialDistribution_FracAtD_original_gray_2of4,spheroids_filtered|RadialDistribution_FracAtD_original_gray_1of4,spheroids_filtered|RadialDistribution_FracAtD_original_gray_4of4,spheroids_filtered|RadialDistribution_FracAtD_original_gray_3of4,spheroids_filtered|RadialDistribution_MeanFrac_original_gray_1of4,spheroids_filtered|RadialDistribution_MeanFrac_original_gray_2of4,spheroids_filtered|RadialDistribution_MeanFrac_original_gray_4of4,spheroids_filtered|RadialDistribution_MeanFrac_original_gray_3of4,spheroids_filtered|Number_Object_Number,spheroids_filtered|Location_CenterMassIntensity_Y_original_gray,spheroids_filtered|Location_CenterMassIntensity_Z_original_gray,spheroids_filtered|Location_CenterMassIntensity_X_original_gray,spheroids_filtered|Location_Center_Z,spheroids_filtered|Location_Center_X,spheroids_filtered|Location_Center_Y,spheroids_filtered|Location_MaxIntensity_Y_original_gray,spheroids_filtered|Location_MaxIntensity_X_original_gray,spheroids_filtered|Location_MaxIntensity_Z_original_gray
+    Representation of Nan/Inf:NaN
+    Add a prefix to file names?:Yes
+    Filename prefix:cp_output_
+    Overwrite existing files without warning?:Yes
+    Data to export:Do not use
+    Combine these object measurements with those of the previous object?:No
+    File name:DATA.csv
+    Use the object name for the file name?:Yes
+"
+Run_Timestamp,2022-08-22T15:34:40.981112
