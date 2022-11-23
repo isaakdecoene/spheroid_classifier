@@ -1,7 +1,10 @@
-This folder contains all files needed in the automated image analysis pipeline. 
+# Spheroid Classifier
 
+This project contains all files needed in the automated image analysis pipeline. 
 
-Files used for the automated analysis. 
+All software is in a docker container which is available at [hub.docker.com/r/gnasello/spheroid-env](https://hub.docker.com/r/gnasello/spheroid-env)
+
+## Files used for the automated analysis. 
 --------------------------------------------
 
 - rgbtiff_to_hdf5: this was used to convert the raw RGB .tiff pink images to grayvalue hdf5 files that can be read by Ilastik. 
